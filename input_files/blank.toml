@@ -1,0 +1,77 @@
+[contract]
+version = "2023"
+require_insurance = true
+require_tenants_insurance = false
+
+[sign]
+date = "<blank_date>"
+location = "ישראל"
+protocol_date = "<blank_date>"
+
+[landlord]
+name = "________________________"
+city = "__________________"
+address = "________________________________________________"
+id = "____________"
+phone = "______-______________"
+
+[[tenants]]
+name = "________________________"
+city = "__________________"
+address = "________________________________________________"
+id = "____________"
+phone = "______-______________"
+
+[[tenants]]
+name = "________________________"
+city = "__________________"
+address = "________________________________________________"
+id = "____________"
+phone = "______-______________"
+
+[property]
+city = "__________________"
+address = "________________________________________________"
+n_rooms = "____"
+additions = "________________"
+
+[period]
+n_months = 24
+start_date = "<sign_date>"
+end_date = "<from_start_date>"
+
+[payment]
+ils_per_month = 4000
+day = "<start_date|day>"
+mode = "checks"  # can be "bank-transfer", "checks"
+
+[extend_option]
+n_months = 12
+max_raise_percent = 5
+
+[payment.bank_transfer]
+bank_name = "________________________"
+account_number = "____ - ______ - ________________________"
+
+[assurance]
+mode = "bank-guarantee"  # can be "promissory", "bank-guarantee"
+
+[assurance.bank_guarantee]
+amount = "<months> 3"
+
+[assurance.promissory.guarantee]
+name = "________________________"
+id = "____________"
+address_full = "__________________________________________________________________"
+lawyer_name = "________________________"
+date = "<blank_date>"
+
+[assurance.promissory.form]
+amount = "<months> 6"
+sign_location = "<sign_location>"
+date = "<sign_date>"
+base_rate = "______"
+
+[assurance.promissory.received]
+time = "____________"
+location = "________________________"

@@ -1,0 +1,77 @@
+[contract]
+version = "2023"  # can be "2016", "2023"
+require_insurance = true
+require_tenants_insurance = false
+
+[sign]
+date = "<today_plus> 1"
+location = "ישראל"
+protocol_date = "<sign_date>"
+
+[landlord]
+name = "יוסי כהן"
+city = "תל אביב"
+address = "הרצל 12"
+id = "123456789"
+phone = "050-1234567"
+
+[[tenants]]
+name = "מיכל לוי"
+city = "חיפה"
+address = "שדרות הנשיא 45"
+id = "987654321"
+phone = "054-7654321"
+
+[[tenants]]
+name = "אורי פז"
+city = "ירושלים"
+address = "המלך דוד 33"
+id = "456123789"
+phone = "052-3456789"
+
+[property]
+city = "נתניה"
+address = "מעלה השחרור 20"
+n_rooms = "3"
+additions = "מרפסת גדולה"
+
+[period]
+n_months = 24
+start_date = "<sign_date>"
+end_date = "<from_start_date>"
+
+[payment]
+ils_per_month = 4000
+day = "<start_date|day>"
+mode = "checks"  # can be "bank-transfer", "checks"
+
+[extend_option]
+n_months = 12
+max_raise_percent = 5
+
+[payment.bank_transfer]
+bank_name = "בנק הפועלים"
+account_number = "12-456-7890123"
+
+[assurance]
+mode = "bank-guarantee"  # can be "promissory", "bank-guarantee"
+
+[assurance.bank_guarantee]
+amount = "<months> 3"
+
+[assurance.promissory.guarantee]
+name = "רונית רז"
+id = "321654987"
+address_full = "תבור 22, פתח תקווה"
+lawyer_name = "משה דוד"
+date = "<blank_date>"
+
+[assurance.promissory.form]
+amount = "<months> 6"
+sign_location = "<sign_location>"
+date = "<sign_date>"
+base_rate = "169"
+
+[assurance.promissory.received]
+time = "____________"
+location = "________________________"

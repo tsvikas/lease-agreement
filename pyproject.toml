@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "lease-agreement"
+version = "0.1.0"
+description = ""
+authors = ["Tsvika S <tsvika@github>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Jinja2 = "^3.1.4"
+tomli-w = "^1.0.0"
+python-dateutil = "^2.9.0.post0"
+markdown-strings = "^3.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
