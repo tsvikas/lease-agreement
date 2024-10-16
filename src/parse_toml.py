@@ -6,7 +6,6 @@ import tomllib
 from pathlib import Path
 from typing import Any
 
-import tomli_w
 from dateutil.relativedelta import relativedelta
 
 
@@ -175,13 +174,6 @@ def get_context_from_toml(filename: Path):
     return toml_data
 
 
-def convert_toml(input_fn, output_fn):
-    context = get_context_from_toml(filename=input_fn)
-    output_fn.parent.mkdir(exist_ok=True)
-    with args.output_fn.open("wb") as f:
-        tomli_w.dump(context, f)
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="convert an input toml file to a context"
@@ -189,8 +181,5 @@ if __name__ == "__main__":
     parser.add_argument(
         "-i", "--input_fn", type=Path, default=Path("input_files/default.toml")
     )
-    parser.add_argument(
-        "-o", "--output_fn", type=Path, default=Path("output/context.toml")
-    )
     args = parser.parse_args()
-    convert_toml(args.input_fn, args.output_fn)
+    print(get_context_from_toml(filename=args.input_fn))

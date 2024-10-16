@@ -3,10 +3,10 @@ import argparse
 from pathlib import Path
 
 import markdown_strings
-import tomllib
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 from hebrew_numbers import verbal_number
+from parse_toml import get_context_from_toml
 
 
 def ins(s: str):
@@ -86,14 +86,10 @@ def render_template(input_fn, template_fn):
     env.filters["year"] = year
     env.globals["raise"] = raise_helper
 
-    context = get_user_input(input_fn)
+    context = get_context_from_toml(input_fn)
     template = env.get_template(template_fn.name)
     output = template.render(context)
     return output
-
-
-def get_user_input(input_fn):
-    return tomllib.loads(input_fn.read_text())
 
 
 def convert_template(input_fn, template_fn, output_fn):
@@ -104,7 +100,7 @@ def convert_template(input_fn, template_fn, output_fn):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="insert toml to template")
     parser.add_argument(
-        "-i", "--input_fn", type=Path, default=Path("output/context.toml")
+        "-i", "--input_fn", type=Path, default=Path("input_files/default.toml")
     )
     parser.add_argument(
         "-t", "--template", type=Path, default=Path("lease-agreement-text/lease.md")

@@ -122,18 +122,7 @@ files = [
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
 ]
 
-[[package]]
-name = "tomli-w"
-version = "1.0.0"
-description = "A lil' TOML writer"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "tomli_w-1.0.0-py3-none-any.whl", hash = "sha256:9f2a07e8be30a0729e533ec968016807069991ae2fd921a78d42f429ae5f4463"},
-    {file = "tomli_w-1.0.0.tar.gz", hash = "sha256:f463434305e0336248cac9c2dc8076b707d8a12d019dd349f5c1e382dd1ae1b9"},
-]
-
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "98f1179d666d5b44d07ad198ade25755ec8ac5a6c911e5098b87d9b0d492995e"
+content-hash = "9f2ed673507e2fd6e853bb0dcf0dabe0db53e8bc904869e540e8f076bf75ea6e"
