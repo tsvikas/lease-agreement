@@ -108,3 +108,7 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--output_fn", type=Path, default=Path("output/lease.md"))
     args = parser.parse_args()
     convert_template(args.input_fn, args.template, args.output_fn)
+    reference = Path("templates/template.odt")
+    print(
+        f"use `pandoc {args.output_fn} -o {args.output_fn.with_suffix('.odt')} --reference {reference}` to convert the file to ODT format"
+    )
