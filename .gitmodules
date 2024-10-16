@@ -1,0 +1,3 @@
+[submodule "lease-agreement-text"]
+	path = lease-agreement-text
+	url = https://github.com/tsvikas/lease-agreement-text.git
