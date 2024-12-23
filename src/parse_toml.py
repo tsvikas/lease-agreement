@@ -13,7 +13,7 @@ def parse_amount(s: str | int, ils_per_month: int) -> int:
     if isinstance(s, str) and s.startswith("<months> "):
         months = int(s.removeprefix("<months> "))
         if ils_per_month is None:
-            return f"[בגובה של {months} חודשי שכירות]"
+            return f"[{months} חודשי שכירות]"
         return months * int(ils_per_month)
     return int(s)
 
