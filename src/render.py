@@ -78,7 +78,7 @@ def raise_helper(message: str):
     raise RenderError(message)
 
 
-def render_template(input_fn, template_fn, no_underline):
+def render_template(input_fn, template_fn, no_underline, simple):
     env = Environment(
         loader=FileSystemLoader(template_fn.parent), undefined=StrictUndefined
     )
@@ -95,11 +95,16 @@ def render_template(input_fn, template_fn, no_underline):
     context = get_context_from_toml(input_fn)
     template = env.get_template(template_fn.name)
     output = template.render(context)
+    if simple:
+        lines = output.splitlines()
+        output = "\n".join(line for line in lines if not line.startswith(":::"))
+        if output[0] == "%":
+            output = "#" + output[1:]
     return output
 
 
-def convert_template(input_fn, template_fn, output_fn, no_underline):
-    output = render_template(input_fn, template_fn, no_underline)
+def convert_template(input_fn, template_fn, output_fn, no_underline, simple):
+    output = render_template(input_fn, template_fn, no_underline, simple)
     output_fn.write_text(output)
 
 
@@ -116,8 +121,11 @@ if __name__ == "__main__":
     )
     parser.add_argument("-o", "--output_fn", type=Path, default=Path("output/lease.md"))
     parser.add_argument("-U", "--no_underline", action="store_true")
+    parser.add_argument("--simple", action="store_true")
     args = parser.parse_args()
-    convert_template(args.input_fn, args.template, args.output_fn, args.no_underline)
+    convert_template(
+        args.input_fn, args.template, args.output_fn, args.no_underline, args.simple
+    )
     reference = Path("templates/template.odt")
     print(
         f"use `pandoc {args.output_fn} -o {args.output_fn.with_suffix('.odt')} --reference {reference}` to convert the file to ODT format"
