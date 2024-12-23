@@ -14,9 +14,11 @@ repos:
       - id: detect-private-key
       # text in files
       - id: end-of-file-fixer
+        exclude: "^output/lease-blank.md$"
       - id: mixed-line-ending
         args: [--fix=lf]
       - id: trailing-whitespace
+        exclude: "^output/lease-blank.md$"
       # python
       - id: check-ast
         fail_fast: true
@@ -43,3 +45,11 @@ repos:
         args: ["--select", "I001", "--fix"]
       - id: ruff-format
       - id: ruff
+  - repo: local
+    hooks:
+      - id: create-blank-lease
+        name: create blank lease
+        entry: poetry run src/render.py -i input_files/blank.toml -o output/lease-blank.md
+        language: system
+        always_run: true
+        pass_filenames: false
