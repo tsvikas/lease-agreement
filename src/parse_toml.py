@@ -142,7 +142,7 @@ def get_context_from_toml(filename: Path):
 
     # validate values
     keys_with_options = {
-        "contract.version": ["2016", "2023"],
+        "contract.version": ["hoze", "2016", "2023"],
         "payment.mode": ["bank-transfer", "checks"],
         "assurance.mode": ["promissory", "bank-guarantee"],
     }
