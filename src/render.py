@@ -78,11 +78,11 @@ def raise_helper(message: str):
     raise RenderError(message)
 
 
-def render_template(input_fn, template_fn):
+def render_template(input_fn, template_fn, no_underline):
     env = Environment(
         loader=FileSystemLoader(template_fn.parent), undefined=StrictUndefined
     )
-    env.filters["ins"] = ins
+    env.filters["ins"] = esc if no_underline else ins
     env.filters["esc"] = esc
     env.filters["verbal_male"] = verbal_male
     env.filters["verbal_female"] = verbal_female
@@ -98,8 +98,8 @@ def render_template(input_fn, template_fn):
     return output
 
 
-def convert_template(input_fn, template_fn, output_fn):
-    output = render_template(input_fn, template_fn)
+def convert_template(input_fn, template_fn, output_fn, no_underline):
+    output = render_template(input_fn, template_fn, no_underline)
     output_fn.write_text(output)
 
 
@@ -115,8 +115,9 @@ if __name__ == "__main__":
         default=Path("lease-agreement-text/lease.md.jinja"),
     )
     parser.add_argument("-o", "--output_fn", type=Path, default=Path("output/lease.md"))
+    parser.add_argument("-U", "--no_underline", action="store_true")
     args = parser.parse_args()
-    convert_template(args.input_fn, args.template, args.output_fn)
+    convert_template(args.input_fn, args.template, args.output_fn, args.no_underline)
     reference = Path("templates/template.odt")
     print(
         f"use `pandoc {args.output_fn} -o {args.output_fn.with_suffix('.odt')} --reference {reference}` to convert the file to ODT format"
