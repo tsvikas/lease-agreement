@@ -18,12 +18,18 @@ def esc(s: str):
 
 
 def verbal_male(i: int):
-    i = int(i)
+    try:
+        i = int(i)
+    except (TypeError, ValueError):
+        return "_" * 20
     return verbal_number(i, male=True)
 
 
 def verbal_female(i: int):
-    i = int(i)
+    try:
+        i = int(i)
+    except (TypeError, ValueError):
+        return "_" * 20
     return verbal_number(i, male=False)
 
 

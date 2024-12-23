@@ -12,7 +12,9 @@ from dateutil.relativedelta import relativedelta
 def parse_amount(s: str | int, ils_per_month: int) -> int:
     if isinstance(s, str) and s.startswith("<months> "):
         months = int(s.removeprefix("<months> "))
-        return months * ils_per_month
+        if ils_per_month is None:
+            return f"[בגובה של {months} חודשי שכירות]"
+        return months * int(ils_per_month)
     return int(s)
 
 
@@ -89,6 +91,13 @@ def get_context_from_toml(filename: Path):
             "sign"
         ]["location"]
 
+    if toml_data["payment"]["ils_per_month"] == "<blank_rent>":
+        toml_data["payment"]["ils_per_month"] = None
+    else:
+        toml_data["payment"]["ils_per_month"] = int(
+            toml_data["payment"]["ils_per_month"]
+        )
+
     toml_data["assurance"]["bank_guarantee"]["amount"] = parse_amount(
         toml_data["assurance"]["bank_guarantee"]["amount"],
         toml_data["payment"]["ils_per_month"],
@@ -148,11 +157,8 @@ def get_context_from_toml(filename: Path):
 
     keys_int = [
         "period.n_months",
-        "payment.ils_per_month",
         "extend_option.n_months",
         "extend_option.max_raise_percent",
-        "assurance.bank_guarantee.amount",
-        "assurance.promissory.form.amount",
     ]
     for k in keys_int:
         if not isinstance(get_item(toml_data, k), int):

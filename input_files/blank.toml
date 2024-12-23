@@ -41,7 +41,7 @@ start_date = "<sign_date>"
 end_date = "<from_start_date>"
 
 [payment]
-ils_per_month = 4000
+ils_per_month = "<blank_rent>"
 day = "<start_date|day>"
 mode = "checks"  # can be "bank-transfer", "checks"
 
