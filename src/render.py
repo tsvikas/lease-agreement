@@ -35,19 +35,19 @@ def verbal_female(i: int):
 
 def date(d):
     if d == "_":
-        return r"\_\_\_\_.\_\_\_\_.\_\_\_\_\_\_\_\_"
+        return r"____.____.________"
     return f"{d.day}.{d.month}.{d.year}"
 
 
 def day(d):
     if d == "_":
-        return r"\_\_\_\_"
+        return r"____"
     return d.day
 
 
 def month_name(d):
     if d == "_":
-        return r"\_\_\_\_"
+        return r"____"
     return {
         1: "ינואר",
         2: "פברואר",
@@ -66,7 +66,7 @@ def month_name(d):
 
 def year(d):
     if d == "_":
-        return r"\_\_\_\_\_\_\_\_"
+        return r"________"
     return d.year
 
 
