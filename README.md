@@ -12,9 +12,16 @@
 הכותב אינו נושא באחריות לשום נזק או הפסד שעלול להיגרם כתוצאה משימוש בתוכן זה.
 
 ## Usage
-This is a jinja template of a markdown format.
-See [tsvikas/lease-agreement](https://github.com/tsvikas/lease-agreement)
-for a Markdown file with blank lines, that can be loaded into word processors
+Create a new Markdown with your personal data with
+```
+poetry install
+poetry run src/render.py -i <path to input toml> -o <path to output file>
+```
+or use the [pre-made blank lease](output/lease-blank.md)
+
+The markdown can be viewed or edited with various editors.
+To use Google Docs, see [this](https://support.google.com/docs/answer/12014036):
+you'll need to turn markdown on, then "Paste from Markdown"
 
 ## מקורות
 ### עיריית תל אביב
