@@ -103,7 +103,10 @@ if __name__ == "__main__":
         "-i", "--input_fn", type=Path, default=Path("input_files/default.toml")
     )
     parser.add_argument(
-        "-t", "--template", type=Path, default=Path("lease-agreement-text/lease.md")
+        "-t",
+        "--template",
+        type=Path,
+        default=Path("lease-agreement-text/lease.md.jinja"),
     )
     parser.add_argument("-o", "--output_fn", type=Path, default=Path("output/lease.md"))
     args = parser.parse_args()
