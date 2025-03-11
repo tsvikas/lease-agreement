@@ -56,3 +56,4 @@ repos:
 ci:
   skip:
     - create-blank-lease
+  autoupdate_schedule: quarterly
