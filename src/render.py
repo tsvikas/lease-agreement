@@ -128,5 +128,5 @@ if __name__ == "__main__":
     )
     reference = Path("templates/template.odt")
     print(
-        f"use `pandoc {args.output_fn} -o {args.output_fn.with_suffix('.odt')} --reference {reference}` to convert the file to ODT format"
+        f"use `pandoc {args.output_fn} -o {args.output_fn.with_suffix('.odt')} --reference-doc {reference}` to convert the file to ODT format"
     )
