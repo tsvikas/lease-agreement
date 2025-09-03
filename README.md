@@ -5,12 +5,24 @@
 כל הזכויות לחוזה המקורי שמורות לבעלי הזכויות המקוריים, ככל שיש כאלה.
 
 ## שימוש בסיסי
-באמצעות הקוד המצורף אפשר למלא את החוזה בפרטי הצדדים.
-לחילופין, מסופקת [גירסה ריקה של החוזה](output/lease-blank.md).
+מסופקת [גירסה ריקה של החוזה](output/lease-blank.md).
 
 מומלץ להעתיק אותה (כפתור Copy raw file), ולהדביק אותה לתוך Google Doc (לחיצה ימנית, Paste from Markdown).
 
 (דורש לעשות Tools, Preferences, Enable Markdown)
+
+## שימוש מתקדם
+באמצעות הקוד המצורף אפשר למלא את החוזה בפרטי הצדדים.
+
+יש ליצור קובץ TOML עם הפרטים שיש למלא בחוזה
+(קובץ לדוגמה: `input_files/example.toml`).
+ולהריץ:
+```
+uv run src/render.py -i <path to input toml> -o <path to output file>
+```
+את התוצאה אפשר להעתיק לגוגל דוקס כמו מקודם.
+
+אם צריך, יש הוראות נוספות כדי להפוך את הקובץ ל ODT.
 
 ## הסרת אחריות
 השימוש בחוזה השכירות הינו באחריותם הבלעדית של הצדדים לחוזה.
@@ -23,7 +35,7 @@
 הכותב אינו נושא באחריות לשום נזק או הפסד שעלול להיגרם כתוצאה משימוש בתוכן זה.
 
 ## Usage
-Create a new Markdown with your personal data with
+Create a toml file with your data (see `input/example.toml`), and convert it to Markdown with
 ```
 uv run src/render.py -i <path to input toml> -o <path to output file>
 ```
