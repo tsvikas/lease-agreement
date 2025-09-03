@@ -3,9 +3,9 @@ import argparse
 from pathlib import Path
 
 import markdown_strings
+from hebrew_numbers import count_prefix
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-from hebrew_numbers import verbal_number
 from parse_toml import get_context_from_toml
 
 
@@ -17,20 +17,13 @@ def esc(s: str):
     return markdown_strings.esc_format(s, esc=True)
 
 
-def verbal_male(i: int):
+def safe_hebrew_number(value, gender):
+    """Safely convert number to Hebrew with fallback for non-integer values."""
     try:
-        i = int(i)
-    except (TypeError, ValueError):
+        num = int(value)
+        return count_prefix(num, gender)
+    except (TypeError, ValueError, AttributeError, Exception):
         return "_" * 20
-    return verbal_number(i, male=True)
-
-
-def verbal_female(i: int):
-    try:
-        i = int(i)
-    except (TypeError, ValueError):
-        return "_" * 20
-    return verbal_number(i, male=False)
 
 
 def date(d):
@@ -84,13 +77,12 @@ def render_template(input_fn, template_fn, no_underline, simple):
     )
     env.filters["ins"] = esc if no_underline else ins
     env.filters["esc"] = esc
-    env.filters["verbal_male"] = verbal_male
-    env.filters["verbal_female"] = verbal_female
     env.filters["date"] = date
     env.filters["month_name"] = month_name
     env.filters["day"] = day
     env.filters["year"] = year
     env.globals["raise"] = raise_helper
+    env.filters["hebrew_count"] = safe_hebrew_number
 
     context = get_context_from_toml(input_fn)
     template = env.get_template(template_fn.name)
