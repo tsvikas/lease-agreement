@@ -25,8 +25,7 @@
 ## Usage
 Create a new Markdown with your personal data with
 ```
-poetry install
-poetry run src/render.py -i <path to input toml> -o <path to output file>
+uv run src/render.py -i <path to input toml> -o <path to output file>
 ```
 or use the [pre-made blank lease](output/lease-blank.md)
 
