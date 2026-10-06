@@ -5,8 +5,11 @@ import datetime
 import tomllib
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 from dateutil.relativedelta import relativedelta
+
+LEASE_TZ = ZoneInfo("Asia/Jerusalem")
 
 
 def parse_amount(s: str | int, ils_per_month: int) -> int:
@@ -30,10 +33,10 @@ def parse_date(
         if s == f"<{name}>":
             return special_date[name]
     if s == "<today>":
-        return datetime.datetime.now().astimezone().date()
+        return datetime.datetime.now(tz=LEASE_TZ).date()
     if s.startswith("<today_plus> "):
         n = int(s.removeprefix("<today_plus> "))
-        return datetime.datetime.now().astimezone().date() + relativedelta(days=n)
+        return datetime.datetime.now(tz=LEASE_TZ).date() + relativedelta(days=n)
     if s == "<blank_date>":
         return None
     return datetime.date.fromisoformat(s)
