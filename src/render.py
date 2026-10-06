@@ -3,7 +3,7 @@ import argparse
 from pathlib import Path
 
 import markdown_strings
-from hebrew_numbers import count_prefix
+from hebrew_numbers import InvalidNumberError, count_prefix
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 from parse_toml import get_context_from_toml
@@ -22,7 +22,7 @@ def safe_hebrew_number(value, gender):
     try:
         num = int(value)
         return count_prefix(num, gender)
-    except (TypeError, ValueError, AttributeError, Exception):
+    except (TypeError, ValueError, AttributeError, InvalidNumberError):
         return "_" * 20
 
 

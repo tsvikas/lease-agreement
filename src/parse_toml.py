@@ -30,10 +30,10 @@ def parse_date(
         if s == f"<{name}>":
             return special_date[name]
     if s == "<today>":
-        return datetime.date.today()
+        return datetime.datetime.now().astimezone().date()
     if s.startswith("<today_plus> "):
         n = int(s.removeprefix("<today_plus> "))
-        return datetime.date.today() + relativedelta(days=n)
+        return datetime.datetime.now().astimezone().date() + relativedelta(days=n)
     if s == "<blank_date>":
         return None
     return datetime.date.fromisoformat(s)
@@ -43,7 +43,7 @@ def none_to_str(d: datetime.date | None) -> datetime.date | str:
     if d is None:
         return "_"
     if not isinstance(d, datetime.date):
-        raise ValueError("unsupported type for date")
+        raise TypeError("unsupported type for date")
     return d
 
 
