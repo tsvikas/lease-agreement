@@ -52,7 +52,7 @@ def add_to_date(date: datetime.date | None, delta: relativedelta):
         return date
     if isinstance(date, datetime.date):
         return date + delta
-    raise ValueError("unsupported value for date")
+    raise TypeError("unsupported type for date")
 
 
 def parse_payment_day(s: str, start_date: datetime.date | None) -> str:

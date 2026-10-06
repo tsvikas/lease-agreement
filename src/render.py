@@ -21,8 +21,11 @@ def safe_hebrew_number(value, gender):
     """Safely convert number to Hebrew with fallback for non-integer values."""
     try:
         num = int(value)
+    except (TypeError, ValueError, OverflowError):
+        return "_" * 20
+    try:
         return count_prefix(num, gender)
-    except (TypeError, ValueError, AttributeError, InvalidNumberError):
+    except InvalidNumberError:
         return "_" * 20
 
 
