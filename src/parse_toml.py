@@ -5,8 +5,11 @@ import datetime
 import tomllib
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 from dateutil.relativedelta import relativedelta
+
+LEASE_TZ = ZoneInfo("Asia/Jerusalem")
 
 
 def parse_amount(s: str | int, ils_per_month: int) -> int:
@@ -30,10 +33,10 @@ def parse_date(
         if s == f"<{name}>":
             return special_date[name]
     if s == "<today>":
-        return datetime.date.today()
+        return datetime.datetime.now(tz=LEASE_TZ).date()
     if s.startswith("<today_plus> "):
         n = int(s.removeprefix("<today_plus> "))
-        return datetime.date.today() + relativedelta(days=n)
+        return datetime.datetime.now(tz=LEASE_TZ).date() + relativedelta(days=n)
     if s == "<blank_date>":
         return None
     return datetime.date.fromisoformat(s)
@@ -43,7 +46,7 @@ def none_to_str(d: datetime.date | None) -> datetime.date | str:
     if d is None:
         return "_"
     if not isinstance(d, datetime.date):
-        raise ValueError("unsupported type for date")
+        raise TypeError("unsupported type for date")
     return d
 
 
@@ -52,7 +55,7 @@ def add_to_date(date: datetime.date | None, delta: relativedelta):
         return date
     if isinstance(date, datetime.date):
         return date + delta
-    raise ValueError("unsupported value for date")
+    raise TypeError("unsupported type for date")
 
 
 def parse_payment_day(s: str, start_date: datetime.date | None) -> str:

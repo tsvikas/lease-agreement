@@ -2,7 +2,7 @@
 import argparse
 from pathlib import Path
 
-from hebrew_numbers import count_prefix
+from hebrew_numbers import InvalidNumberError, count_prefix
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 from parse_toml import get_context_from_toml
@@ -21,8 +21,11 @@ def safe_hebrew_number(value, gender):
     """Safely convert number to Hebrew with fallback for non-integer values."""
     try:
         num = int(value)
+    except (TypeError, ValueError, OverflowError):
+        return "_" * 20
+    try:
         return count_prefix(num, gender)
-    except (TypeError, ValueError, AttributeError, Exception):
+    except InvalidNumberError:
         return "_" * 20
 
 
