@@ -2,19 +2,19 @@
 import argparse
 from pathlib import Path
 
-import markdown_strings
 from hebrew_numbers import count_prefix
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 from parse_toml import get_context_from_toml
 
 
-def ins(s: str):
-    return f"[{markdown_strings.esc_format(s, esc=True)}]{{.underline}}"
+def esc(s) -> str:
+    """Escape characters that would trigger markdown formatting."""
+    return str(s).replace("_", r"\_").replace("*", r"\*").replace("`", r"\`")
 
 
-def esc(s: str):
-    return markdown_strings.esc_format(s, esc=True)
+def ins(s) -> str:
+    return f"[{esc(s)}]{{.underline}}"
 
 
 def safe_hebrew_number(value, gender):
